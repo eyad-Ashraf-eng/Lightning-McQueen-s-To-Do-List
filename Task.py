@@ -7,6 +7,27 @@ def view_tasks(filename):
     with open(filename, "r")as f:
         content = f.read()
         print(content)      
+def mark_task_complete(thetask, filename):
+    with open(filename, "r") as f:
+        tasks = f.readlines()
+    with open(filename, "w") as f:
+      for task in tasks:
+         if task.strip("\n") != thetask:
+                f.writelines(task)
+         else:
+                f.writelines(thetask + " ((completed))\n")
+                print("Task marked as complete")    
+
+def remove_task(thetask, filename):
+    with open(filename, "r") as f:
+        tasks = f.readlines()
+    with open(filename, "w") as f:
+     for task in tasks:
+       if task.strip("\n") != thetask:
+                f.writelines(task)
+       else:
+                print("Task removed")
+
 while True:
     print("Greetings! Lightning McQueen is ready to race!")
     print("Here is your options")
@@ -22,6 +43,17 @@ while True:
             add_task(task, "tasks.txt")
      case "2":
             view_tasks("tasks.txt")
+     case "3":
+            task = input("Enter the task you want to mark as complete: ")
+            mark_task_complete(task, "tasks.txt")
+     case "4":
+            task = input("Enter the task you want to remove: ")
+            remove_task(task, "tasks.txt")   
+
+
+
+
+         
      case "5":
             print("Goodbye!")
             break       
